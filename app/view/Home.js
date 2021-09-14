@@ -156,11 +156,12 @@ Ext.define('VT.view.Home', {
                             {
                                 xtype: 'button',
                                 flex: 1,
+                                ui: 'action',
                                 disabled: false,
-                                id: 'dpBtn',
+                                id: 'allBtn',
                                 iconAlign: 'top',
                                 iconCls: 'team',
-                                text: 'ДП'
+                                text: 'Всички'
                             },
                             {
                                 xtype: 'spacer',

@@ -27,8 +27,7 @@ Ext.application({
     ],
 
     stores: [
-        'BaseStore'
-
+        'BaseStore',
     ],
 
     models: [

@@ -4,22 +4,24 @@ Ext.define('VT.store.BaseStore', {
     requires: [
         'Ext.data.proxy.JsonP',
         'Ext.data.reader.Json',
-        // 'Ext.util.Filter'
+        'Ext.util.Filter'
     ],
 
     config: {
-        autoLoad: false,
+        autoLoad: true,
         model: 'VT.model.BaseModel',
-        // remoteFilter: true,
+        remoteFilter: false,
         storeId: 'BaseStore',
+        pageSize: 15,
         // syncRemovedRecords: false,
-        defaultRootProperty: 'items',
+        defaultRootProperty: 'text',
         proxy: {
             type: 'jsonp',
-            url: 'https://vasil.iag.bg/tel/v2',
+            url: 'https://vasil.iag.bg/',
             reader: {
                 type: 'json',
-                rootProperty: '',
+                rootProperty: 'items',
+                totalProperty: 'total'
             }
         }
     }

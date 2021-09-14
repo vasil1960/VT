@@ -7,6 +7,7 @@ Ext.define('VT.controller.BaseController', {
             iagBtn: 'button#iagBtn',
             rdgBtn: 'button#rdgBtn',
             dgsBtn: 'button#dgsBtn',
+            allBtn: 'button#allBtn',
             btnBackToHome: '#btnBackToHome',
             // dgsList: 'list#dgslist',
             baselist: 'list#baselist',
@@ -25,6 +26,9 @@ Ext.define('VT.controller.BaseController', {
             },
             'dgsBtn': {
                 tap: 'onDgsBtnTap'
+            },
+            'allBtn': {
+                tap: 'onAllBtnTap'
             }
 
         }
@@ -36,78 +40,30 @@ Ext.define('VT.controller.BaseController', {
     },
 
     onIagBtnTap: function(){
-        this.onBtnTap('iag');
+        this.onBtnTap('v3/iag');
     },
 
     onRdgBtnTap: function(){
-        this.onBtnTap('rdg');
+        this.onBtnTap('v3/rdg');
     },
 
     onDgsBtnTap: function(){
-        this.onBtnTap('dgs');
+        this.onBtnTap('v3/dgs');
     },
 
+    onAllBtnTap: function(){
+        this.onBtnTap('v2');
+    },
 
     onBtnTap: function(urlparam){
         Ext.Viewport.setMasked(true);
         var main = Ext.getCmp('main');
         var baseStore = Ext.getStore('BaseStore');
         baseStore.setAutoLoad(false);
-        baseStore.getProxy().setUrl('https://vasil.iag.bg/tel/v3/'+ urlparam);
-        baseStore.load({
-                     callback: function(records, operation, success) {
-                
-                        if(success)
-                        {
-                            main.setActiveItem(1);
-                            Ext.Viewport.setMasked(false);
-
-                        } else {
-                            Ext.Viewport.setMasked(false);
-                            Ext.Msg.alert('Събщение', 'Проверете връзката с интернет и рестартирайте приложението', Ext.emptyFn);
-                        }
-                    }       
-                });
+        baseStore.getProxy().setUrl('https://vasil.iag.bg/tel/'+ urlparam);
+        // baseStore.filter('egn','6002103441');
+        baseStore.load();
+        main.setActiveItem(1);
         Ext.Viewport.setMasked(false);
-    }
- 
-    
-    // onIagBtnTap1: function (dataview, index, target, record, e, eOpts) {
-    //     // console.log('tap');
-
-    //     var store = Ext.getStore('BaseStore');
-    //     var main = this.getMain();
-
-    //     store.setAutoLoad(false);
-
-    //     Ext.Viewport.setMasked({
-    //         xtype:'loadmask', 
-    //         message:'Зареждам ...', 
-    //         indicator:true 
-    //     });
-        
-    //     store.load({
-    //         callback: function(records, operation, success) {
-                
-    //             if(success)
-    //             {
-    //                 // console.log(records);
-                   
-    //                 // Ext.Viewport.animateActiveItem(Ext.create('VT.view.BaseList'),{type:'fade',duration: 400});
-    //                 // Ext.Viewport.setMasked(false);
-                    
-    //                 main.push({
-    //                     xtype: 'baselist',
-    //                     // title: 'Регионални дирекции'
-    //                 });
-
-    //                 Ext.Viewport.setMasked(false);
-
-    //             } else {
-    //                 Ext.Viewport.setMasked(false);
-    //                 Ext.Msg.alert('Събщение', 'Проверете връзката с интернет и рестартирайте приложението', Ext.emptyFn);
-    //             }
-    //         }   
-    //     });  
-    // }
+    }    
 });

@@ -5,7 +5,8 @@ Ext.define('VT.view.BaseList', {
 
     requires: [
         'Ext.XTemplate',
-        'Ext.plugin.ListPaging'
+        'Ext.plugin.ListPaging',
+        'Ext.plugin.PullRefresh'
     ],
 
     config: {
@@ -31,14 +32,18 @@ Ext.define('VT.view.BaseList', {
             html: 'You are viewing the detail card!',
         },
 
-        tpl:['{gsm}'],
+        // itemTpl: [
+        //     '<div class="tweet">{text}</div>'
+        // ],
+
+        // tpl:['{gsm}'],
 
         // listConfig: {
-            // html: (
-            //     '<img style="float:left" src="https://vasil.iag.bg/upload/{glav_pod}/{picture}" width="80" heigh="80">',
-            //     '</img><h1>{text}',
-            //     '</h1><p>{gsm}</p>'
-            // ),
+        //     html: (
+        //         '<img style="float:left" src="https://vasil.iag.bg/upload/{glav_pod}/{picture}" width="80" heigh="80">',
+        //         '</img><h1>{text}',
+        //         '</h1><p>{gsm}</p>'
+        //     ),
                     
         // },
 
@@ -47,9 +52,22 @@ Ext.define('VT.view.BaseList', {
         // fullscreen: true,
         title: '',
 
+        // plugins: [
+        //     {
+        //         xclass: 'Ext.plugin.ListPaging',
+        //         autoPaging: true,
+        //         loadMoreText: 'Зареждам...',
+        //         noMoreRecordsText: 'Няма други служители'
+        //     },
+        //     // {
+        //     //     xclass: 'Ext.plugin.PullRefresh',
+        //     //     pullText: 'Pull down to refresh'
+        //     // }
+        // ],
+
         scrollable: {
                 direction: 'vertical',
-                // directionLock: false
+                directionLock: true
             },
 
         // scrollable: {
